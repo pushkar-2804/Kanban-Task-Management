@@ -9,8 +9,10 @@
 	"scripts": {
 		"test": "jest",
 		"server": "nodemon server/index.js",
+		"build-client": "vite build --prefix client",
 		"client": "npm run dev --prefix client",
 		"dev": "concurrently \"npm run server\" \"npm run client\"",
+		"build": "concurrently \"npm run server\" \"npm run build-client\"",
 		"start-server": "node server/index.js"
 	},
 	"author": "Pushkar Khare",
