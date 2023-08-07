@@ -1,0 +1,133 @@
+@import '../variables', '../mixins', '../breakpoints';
+
+.kanban__sidebar {
+	position: fixed;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	width: 300px;
+	background-color: #fff;
+	border-right: 1px solid darken($color: $light-secondary-gray, $amount: 5%);
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	color: $light-primary-gray;
+	z-index: 101;
+
+	@include lg {
+		width: 260px;
+	}
+
+	.kanban__sidebar-boards_container {
+		margin-top: 40px;
+
+		.kanban__sidebar-logo {
+			width: fit-content;
+			height: auto;
+			margin-bottom: 56px;
+			padding-left: 40px;
+
+			img {
+				pointer-events: none;
+			}
+
+			@include lg {
+				padding-left: 20px;
+			}
+		}
+
+		h1 {
+			@include headingSm;
+			letter-spacing: 2.4px;
+			margin-bottom: 20px;
+			padding-left: 40px;
+			text-transform: uppercase;
+
+			@include lg {
+				padding-left: 20px;
+			}
+		}
+
+		.kanban__sidebar-boards {
+			max-height: 500px;
+			overflow-y: auto;
+
+			@include md {
+				max-height: 250px;
+			}
+		}
+	}
+
+	.kanban__sidebar-bottom_container {
+		width: 100%;
+		margin-bottom: 3rem;
+		display: flex;
+		flex-direction: column;
+
+		.kanban__sidebar-toggle {
+			background-color: $light-secondary-gray;
+			margin: 0 1rem 1rem 1rem;
+			padding: 1rem 3rem;
+			display: flex;
+			justify-content: space-around;
+			align-items: center;
+			border-radius: 6px;
+
+			@include lg {
+				padding: 1rem 3rem;
+			}
+
+			@include md {
+				padding: .5rem 3rem;
+			}
+		}
+
+		.kanban__sidebar-hide-container {
+			display: flex;
+			padding: 1rem 1.5rem;
+			margin-right: 1rem;
+			border-radius: 0px 100px 100px 0px;
+			@include headingMd;
+			transition: $ease-1;
+
+			@include lg {
+				font-size: $font-size-m;
+				margin-right: 3rem;
+			}
+
+			&:hover {
+				background-color: rgba($light-secondary-purple, 0.1);
+				color: $light-primary-purple;
+			}
+
+			svg {
+				font-size: 16px;
+				margin-right: 1rem;
+			}
+
+			p {
+				cursor: pointer;
+			}
+		}
+	}
+}
+
+.kanban__sidebar-hide {
+	transform: translateX(-100%);
+	transition: $ease-2;
+}
+
+.kanban__sidebar-show {
+	transform: translateX(0);
+	transition: $ease-2;
+}
+
+.kanban__sidebar-dark {
+	@extend .kanban__sidebar;
+	background-color: $dark-primary-gray;
+	border-right: 1px solid $light-dark-primary-gray;
+
+	.kanban__sidebar-toggle {
+		background-color: $darker-primary-gray !important;
+	}
+}

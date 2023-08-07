@@ -1,0 +1,16 @@
+@import './variables.scss', './breakpoints.scss', './mixins.scss';
+
+.kanban__input-error {
+	@include headingSm;
+	@include inputErrorMessage(fadeIn);
+	padding: 0.2rem 0;
+	font-weight: 500;
+	color: $light-primary-red;
+	animation: fadeIn $ease-1;
+}
+
+.kanban__input-error-task {
+	@extend .kanban__input-error;
+	position: relative;
+	bottom: 15px;
+}

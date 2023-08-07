@@ -1,0 +1,21 @@
+@import '../variables', '../mixins', '../breakpoints';
+
+.kanban__main-content {
+	height: 100vh;
+	padding-left: 40px;
+	padding-top: 106px;
+	z-index: -1;
+	transition: $ease-2;
+
+	@include lg {
+		padding-left: 10px;
+	}
+}
+
+.kanban__main-content_sidebar {
+	padding-left: 330px;
+
+	@include lg {
+		padding-left: 270px;
+	}
+}

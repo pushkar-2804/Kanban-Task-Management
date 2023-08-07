@@ -1,0 +1,39 @@
+@import '../../variables', '../../mixins', '../../breakpoints';
+
+.kanban__add-board_heading {
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 1rem;
+
+	.kanban__add-board_input-error {
+		@include inputTextError;
+		@include inputError(shake);
+		border: 1px solid $light-primary-red;
+		animation: shake $ease-2;
+	}
+}
+
+.kanban__add-board_add-column_button {
+	@include buttonPrimary;
+	@include headingMd;
+	background-color: rgba($light-primary-purple, 0.1);
+	color: $light-primary-purple;
+	padding: 0.65rem 3rem;
+	width: 100%;
+
+	&:hover {
+		color: $light-primary-white;
+	}
+}
+
+label {
+	font-size: $font-size-l;
+	color: $light-primary-gray;
+	margin-bottom: 0.5rem;
+	font-weight: 700;
+}
+
+input {
+	@include inputText;
+	border: 1px solid rgba($light-primary-gray, 0.25);
+}

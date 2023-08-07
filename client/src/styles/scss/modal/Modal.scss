@@ -1,0 +1,70 @@
+@import '../variables', '../mixins', '../breakpoints';
+
+.kanban__modal-overlay {
+	@include overlay;
+
+	.kanban__modal-container {
+		@include modal;
+		@include modalFadeIn(fadeIn);
+		animation: fadeIn 0.4s forwards;
+
+		.kanban__modal-title {
+			@include headingLg;
+			margin-bottom: 1rem;
+			position: relative;
+			padding-left: 12px;
+
+			&::after {
+				content: '';
+				position: absolute;
+				left: 0;
+				top: 0;
+				width: 3px;
+				height: 100%;
+				background-color: $light-primary-purple;
+			}
+		}
+
+		.kanban__modal-footer {
+			margin-top: 1rem;
+
+			@include sm {
+				margin-top: 0;
+			}
+
+			.kanban__modal-button {
+				@include buttonPrimary;
+				@include headingMd;
+				width: 100%;
+				display: block;
+				padding: 0.65rem 3rem;
+
+				@include md {
+					@include headingSm;
+				}
+			}
+		}
+	}
+
+	.kanban__modal-container-dark {
+		@extend .kanban__modal-container;
+		background-color: $dark-primary-gray;
+		color: $light-primary-white;
+
+		input[type='text'],
+		textarea {
+			background-color: $dark-primary-gray;
+			color: $light-primary-white;
+
+			&::placeholder {
+				color: $light-primary-white;
+			}
+		}
+
+		select {
+			background-color: $dark-primary-gray !important;
+			border: 1px solid $light-secondary-gray;
+			color: $light-primary-white !important;
+		}
+	}
+}

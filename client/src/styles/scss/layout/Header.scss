@@ -1,0 +1,178 @@
+@import '../variables', '../mixins', '../breakpoints';
+
+.kanban__header {
+	height: 96px;
+	background-color: $light-primary-white;
+	position: fixed;
+	width: 100%;
+	z-index: 100;
+	border-bottom: 1px solid darken($color: $light-secondary-gray, $amount: 5%);
+
+	.kanban__header-logo {
+		height: 100%;
+		display: flex;
+		align-items: center;
+		position: absolute;
+		left: 40px;
+		padding-right: 2rem;
+
+		img {
+			pointer-events: none;
+
+			@include md {
+				width: 100px;
+			}
+		}
+
+		@include lg {
+			left: 20px;
+		}
+
+		@include md {
+			display: none;
+		}
+	}
+
+	.kanban__header-logo_no-sidebar {
+		border-right: 1px solid darken($color: $light-secondary-gray, $amount: 5%);
+
+		img {
+			pointer-events: none;
+		}
+	}
+
+	.kanban__header-container {
+		margin-left: 300px;
+		padding: 0 2rem;
+		height: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		transition: $ease-2;
+
+		@include lg {
+			margin-left: 260px;
+		}
+
+		@include md {
+			padding: 0 1.5rem;
+		}
+
+		.kanban__header-board_name {
+			@include headingXl;
+			width: 50%;
+		}
+
+		.kanban__header-board_name-hide {
+			display: none;
+		}
+
+		.kanban__header-board_actions {
+			display: flex;
+			position: relative;
+			align-items: center;
+
+			svg {
+				margin-right: 0.2rem;
+			}
+
+			.kanban__header-board_actions-add_small {
+				background-color: $light-primary-purple;
+				margin-right: 1rem;
+				border-radius: 50%;
+				color: $light-primary-white;
+				cursor: pointer;
+
+				svg {
+					margin: 0;
+				}
+
+				@include lg {
+					padding: 12px;
+					border-radius: 50%;
+					width: 40px;
+					height: 40px;
+				}
+			}
+
+			.kanban__header-board_actions-add_disabled {
+				background-color: $light-secondary-gray;
+				pointer-events: none;
+
+				&:hover {
+					background-color: $light-secondary-gray;
+				}
+			}
+
+			button {
+				@include buttonPrimary;
+				display: flex;
+				align-items: center;
+				margin-right: 1rem;
+			}
+
+			.kanban__header-board_actions-menu {
+				display: flex;
+				align-items: center;
+
+				img {
+					cursor: pointer;
+				}
+			}
+
+			.kanban__header-board_dropdown {
+				@include dropdown;
+				@include headingMd;
+				font-weight: 400;
+				top: 120%;
+
+				li {
+					&:first-child {
+						pointer-events: none;
+					}
+
+					@include md {
+						font-size: 0.8rem;
+					}
+				}
+			}
+
+			.kanban__header-board_dropdown-hide {
+				display: none;
+			}
+
+			.kanban__header-board_dropdown-dark {
+				@extend .kanban__header-board_dropdown;
+				background-color: $dark-primary-gray;
+			}
+		}
+
+		.kanban__header-board_actions-sidebar {
+			justify-content: flex-end;
+			width: 100%;
+		}
+	}
+
+	.kanban__header-container_no-sidebar {
+		margin-left: 230px;
+
+		@include lg {
+			margin-left: 200px;
+		}
+
+		@include md {
+			margin-left: 0;
+		}
+	}
+}
+
+.kanban__header-dark {
+	@extend .kanban__header;
+	background-color: $dark-primary-gray;
+	border-bottom: 1px solid $light-dark-primary-gray;
+	color: $light-primary-white;
+
+	.kanban__header-logo_no-sidebar {
+		border-right: 1px solid $light-dark-primary-gray;
+	}
+}

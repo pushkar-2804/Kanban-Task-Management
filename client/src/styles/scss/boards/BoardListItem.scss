@@ -1,0 +1,70 @@
+@import '../variables', '../mixins', '../breakpoints';
+
+.kanban__board-item {
+	display: flex;
+	padding: 12px 20px 12px 40px;
+	margin: 0 30px 0 0;
+	border-radius: 0px 100px 100px 0px;
+	align-items: center;
+	@include headingMd;
+
+	@include lg {
+		padding-left: 20px;
+		font-size: $font-size-m;
+	}
+
+	&:hover {
+		background-color: $light-primary-purple;
+		color: $light-primary-white;
+	}
+
+	.kanban__board-item_icon {
+		margin-right: 10px;
+		font-size: 1.2rem;
+	}
+
+	.kanban__board-item-text_actions {
+		display: flex;
+		width: 180px;
+		justify-content: space-between;
+
+		@include lg {
+			width: 150px;
+		}
+
+		.kanban__board-item_text {
+			cursor: pointer;
+		}
+
+		.kanban__board-item_actions {
+			display: flex;
+			min-width: 50px;
+			align-items: center;
+
+			span {
+				margin-left: 0.65rem;
+				cursor: pointer;
+			}
+		}
+	}
+}
+
+.kanban__board-item_create {
+	color: $light-primary-purple;
+
+	.kanban__board-item_text_create {
+		display: flex;
+		align-items: center;
+
+		svg {
+			position: relative;
+			top: 1px;
+			margin-right: 2px;
+		}
+	}
+}
+
+.kanban__board-item-active {
+	background-color: $light-primary-purple;
+	color: $light-primary-white;
+}

@@ -1,0 +1,24 @@
+@import '../../variables', '../../mixins', '../../breakpoints';
+
+.kanban__add-column_heading {
+	display: flex;
+	flex-direction: column;
+
+	.kanban__add-column_input-error {
+		@include inputTextError;
+		@include inputError(shake);
+		border: 1px solid $light-primary-red;
+		animation: shake $ease-2;
+	}
+}
+
+.kanban__add-column_color {
+	margin-top: 1rem;
+
+	.kanban__add-column_color-picker {
+		margin-top: 1rem;
+		margin-bottom: 1.5rem;
+		display: flex;
+		width: 100% !important;
+	}
+}

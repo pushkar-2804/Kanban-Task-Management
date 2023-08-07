@@ -1,0 +1,71 @@
+@import '../variables', '../mixins', '../breakpoints';
+
+.kanban__dashboard-column {
+	flex-grow: 1;
+	min-width: 280px;
+	max-width: min-content;
+
+	.kanban__dashboard-column_heading {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		margin-bottom: 2rem;
+		margin-top: 1rem;
+		color: $light-primary-gray;
+		position: relative;
+
+		.kanban__dashboard-column_heading-icon {
+			cursor: pointer;
+			left: 5px;
+			position: relative;
+		}
+
+		.kanban__dashboard-column_dropdown {
+			@include dropdown;
+		}
+
+		.kanban__dashboard-column_dropdown-hide {
+			display: none;
+		}
+
+		.kanban__dashboard-column_dropdown-dark {
+			@include dropdown;
+			background-color: $dark-primary-gray;
+		}
+
+		.kanban__dashboard-column_heading-title_container {
+			width: 100%;
+			display: flex;
+			align-items: center;
+
+			.kanban__dashboard-column_title {
+				margin-left: 1rem;
+				letter-spacing: 2.4px;
+				text-transform: uppercase;
+				color: $light-primary-gray;
+				@include headingMd;
+				font-weight: 500;
+			}
+
+			.kanban__dashboard-column_title-marker {
+				width: 1rem;
+				height: 1rem;
+				border-radius: 50%;
+			}
+		}
+	}
+
+	.kanban__dashboard-column_tasks-container {
+		height: calc(100vh - 250px);
+	}
+
+	.kanban__dashboard-column_tasks-container_empty {
+		@extend .kanban__dashboard-column_tasks-container;
+		border: 3px dashed lighten($color: $light-primary-gray, $amount: 25%);
+	}
+
+	.kanban__dashboard-column_tasks-container_empty-dark {
+		@extend .kanban__dashboard-column_tasks-container;
+		border: 3px dashed rgba($light-primary-gray, 0.3);
+	}
+}
