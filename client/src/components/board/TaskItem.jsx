@@ -29,6 +29,7 @@ const TaskItem = ({ task, setShowModal, setModalMode, theme }) => {
       <div className="kanban__dashboard-task_item-title">
         <h3>{title}</h3>
       </div>
+      <h4 style={{ textAlign: "right" }}>{task.priority}</h4>
     </div>
   );
 };

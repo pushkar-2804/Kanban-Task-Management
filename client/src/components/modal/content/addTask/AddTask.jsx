@@ -22,6 +22,7 @@ const AddTask = ({ setShowModal, modalMode, setModalMode }) => {
     title: "",
     description: "",
     status: "",
+    priority: "",
     subtasks: [],
   });
   const [isUpdate, setIsUpdate] = useState(false);
@@ -29,7 +30,7 @@ const AddTask = ({ setShowModal, modalMode, setModalMode }) => {
   // const [subtaskTitle, setSubtaskTitle] = useState([]);
   const [showDropdown, setShowDropdown] = useState(false);
 
-  const { title, description, status, subtasks } = formData;
+  const { title, description, status, subtasks, priority } = formData;
 
   // get theme from context
   const {
@@ -52,6 +53,9 @@ const AddTask = ({ setShowModal, modalMode, setModalMode }) => {
   // get task id from url
   const { taskId } = useParams();
 
+  // Priority types declaration
+  const priorityTypes = ["low", "medium", "high"];
+
   // check modal mode
   useEffect(() => {
     if (modalMode === "updateTask") {
@@ -63,7 +67,7 @@ const AddTask = ({ setShowModal, modalMode, setModalMode }) => {
   // handle input change
   const onChangeHandler = (e) => {
     const { name, value } = e.target;
-
+    console.log("name", name, "value", value);
     setFormData((prevState) => ({
       ...prevState,
       [name]: value,
@@ -71,6 +75,9 @@ const AddTask = ({ setShowModal, modalMode, setModalMode }) => {
 
     if (name === "status" && modalMode === "viewTask") {
       dispatch(updateTask({ taskId, taskData: { status: value } }));
+    }
+    if (name === "priority" && modalMode === "viewTask") {
+      dispatch(updateTask({ taskId, taskData: { priority: value } }));
     }
   };
 
@@ -132,7 +139,7 @@ const AddTask = ({ setShowModal, modalMode, setModalMode }) => {
     (e) => {
       e.preventDefault();
 
-      if (!title || !description || !status) {
+      if (!title || !description || !status || !priority) {
         // concatenate all errors into one array
         const allErrors = [
           ...(!title
@@ -159,6 +166,14 @@ const AddTask = ({ setShowModal, modalMode, setModalMode }) => {
                 },
               ]
             : []),
+          ...(!priority
+            ? [
+                {
+                  msg: "Select a priority",
+                  param: "priority",
+                },
+              ]
+            : []),
         ];
 
         setErrors(allErrors);
@@ -170,6 +185,7 @@ const AddTask = ({ setShowModal, modalMode, setModalMode }) => {
         title,
         description,
         status,
+        priority,
         subtasks,
       };
 
@@ -184,7 +200,7 @@ const AddTask = ({ setShowModal, modalMode, setModalMode }) => {
         setShowModal(false);
       }
     },
-    [dispatch, title, description, status, subtasks, isUpdate, errors]
+    [dispatch, title, description, status, subtasks, isUpdate, errors, priority]
   );
 
   // handle update task
@@ -263,7 +279,10 @@ const AddTask = ({ setShowModal, modalMode, setModalMode }) => {
         )}
 
         {modalMode === "viewTask" ? (
-          <p className="kanban__add-task_description">{task.description}</p>
+          <div>
+            <p>({task.priority})</p>
+            <p className="kanban__add-task_description">{task.description}</p>
+          </div>
         ) : (
           <div className="kanban__add-task_description-update">
             <label htmlFor="description">Description</label>
@@ -278,6 +297,7 @@ const AddTask = ({ setShowModal, modalMode, setModalMode }) => {
               value={description}
               onChange={onChangeHandler}
             />
+
             <Error errors={errors} errorParam="description" />
           </div>
         )}
@@ -356,6 +376,31 @@ const AddTask = ({ setShowModal, modalMode, setModalMode }) => {
             ))}
           </select>
           <Error errors={errors} errorParam="status" />
+        </div>
+        <div className="kanban__add-task_status-container">
+          <label htmlFor="priority">
+            {modalMode === "viewTask" ? "Current Priority" : "Priority"}
+          </label>
+          <select
+            className={
+              errors.map((err) => err.param).includes("priority")
+                ? "kanban__add-task_input-error"
+                : ""
+            }
+            type="text"
+            placeholder="e.g Todo"
+            name="priority"
+            value={priority}
+            onChange={onChangeHandler}
+          >
+            <option value="">Select priority</option>
+            {priorityTypes.map((priority, index) => (
+              <option key={index} value={priority}>
+                {priority}
+              </option>
+            ))}
+          </select>
+          <Error errors={errors} errorParam="priority" />
         </div>
         {modalMode === "viewTask" ? null : (
           <div className="kanban__modal-footer">
