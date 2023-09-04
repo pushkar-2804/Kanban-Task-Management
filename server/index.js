@@ -18,13 +18,14 @@ const app = express();
 app.use(cookieParser());
 
 // Resolve cors
-const corsOptions = {
-  origin: "https://kanban-task-management-six.vercel.app",
-  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-  credentials: true,
-};
 
-app.use(cors(corsOptions));
+// const corsOptions = {
+//   origin: "https://kanban-task-management-six.vercel.app",
+//   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+//   credentials: true,
+// };
+
+app.use(cors());
 
 // Init middleware
 app.use(express.json());
