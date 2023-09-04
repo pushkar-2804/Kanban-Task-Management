@@ -18,7 +18,13 @@ const app = express();
 app.use(cookieParser());
 
 // Resolve cors
-app.use(cors());
+const corsOptions = {
+  origin: "https://kanban-task-management-six.vercel.app",
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
 
 // Init middleware
 app.use(express.json());
@@ -33,6 +39,13 @@ app.use("/api/tasks", require("./routes/taskRoutes"));
 // Error handler middleware
 app.use(errorHandler);
 
+// if (process.env.NODE_ENV === 'production') {
+// 	app.use(express.static(path.join(__dirname, '../client/dist')));
+
+// 	app.get('*', (req, res) => {
+// 		res.sendFile(path.resolve(__dirname, '../client/dist/index.html'));
+// 	});
+// }
 app.listen(port, () => {
   console.log(`Server successfully started on port ${port} 🚀`);
 });
